@@ -14,6 +14,7 @@ knitr::opts_chunk$set(echo = TRUE)
 dat <- readxl::read_xls('GSS.xls')
 dat
 
-names(dat) <- c('Year','ID', 'Labor Status', 'Working Hours', 'Marital','Sex','Party', 'Happiness')
+names(dat) <- c('Year','Happiness', 'Party', 'Earners', 'Race','Sex','Age', 'Children', 'Marital')
 dat
 ```
+
