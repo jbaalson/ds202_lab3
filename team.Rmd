@@ -1,7 +1,7 @@
 ---
 title: "team"
-author: "Jacob Baalson"
-date: "2/19/2020"
+author: "Jacob Baalson, Charlie Whiting"
+date: "2/24/2020"
 output: html_document
 ---
 
