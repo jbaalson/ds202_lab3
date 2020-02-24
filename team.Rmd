@@ -11,9 +11,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 
 ```{r}
-
-install.packages('readxl')
-dat <- readxl::read_xls('~/Downloads/GSS.xls')
+dat <- readxl::read_xls('GSS.xls')
 dat
 
 names(dat) <- c('Year','ID', 'Labor Status', 'Working Hours', 'Marital','Sex','Party', 'Happiness')
