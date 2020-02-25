@@ -12,7 +12,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ```{r}
 dat <- readxl::read_xls('GSS.xls')
-dat
+
 
 names(dat) <- c('Year','Happiness', 'Party', 'Earners', 'Race','Sex','Age', 'Children', 'Marital', 'ID', 'Ballot')
 ```
@@ -61,6 +61,24 @@ ggplot(dat, aes(x=Year, fill=Happiness)) + geom_histogram(binwidth=10) +
 This chart shows that both men and women are less happy today than they were in years past. This chart groups years into 10 year increments, which allows for ease of comparing different "decades". In both genders, it is shown that they were much more happy in the 1980s and 1990s than they are today. It also shows that women on average tend to be more happy than men in the same decades.
 
 
+4.) How do happiness levels vary between males and females dependent on the number of children the respondent has?
+
+```{r}
+dat4 <- dat[dat$Children != 'Dk na', ]
+ggplot(dat4, aes(x= Happiness, fill = Sex)) + 
+  geom_bar(position = "dodge") + facet_wrap(~Children, scale = 'free_x') + 
+  coord_flip() +ggtitle("Happiness Levels by Sex Faceted by Number of Children")
+```
+Females that have zero children seemed to report at a lower rate that they were 'Not too happy' then with any other amount of children. This was not the same for males as the lowest rate of reporting being 'Not too happy' was when the respondent had 2 children. Males seemed answer 'Very Happy' at around the same rate for all the different number of children they could have while females were 'Very happy' at a higher rate when they had 6 children. Males tended to answer 'Pretty happy' at the highest rate when they had zero children, and females tended to answer 'Pretty Happy' at the same rate throughout all the different numbers of children they could have except they answered this at a lower rate when they 0 children. Overall I believe that this chart illustrates that the number of children a female respondent has does not affect there happiness level drastically as long as they have 1 child or more. With Males this chart seems to show that they as the amount of children the respondent has increases there overall happiness ('Pretty Happy' and 'Very Happy' combined) seems to decrease.
+
+4.) How have Males and Females changed their opinion on Political Party over the years?
+
+```{r}
+##Make a table that contains no duplicate years and columns that represent each political party with there counts in that year
+dat$Party <- factor(dat$Party)
+levels(dat$Party)
+```
+
 
 Group into decades, make barchart of decade by happiness andfacet by sex
 ```{r}
@@ -78,7 +96,6 @@ dat$Earners <- as.integer((dat$Earners))
 
 
 Do the number of earners in a family relate to how many children that family has?
-
 
 
 
