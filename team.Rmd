@@ -24,12 +24,14 @@ library(ggplot2)
 dat <- dat[!is.na(dat$Marital), ]
 dat <- dat[!is.na(dat$Happiness), ]
 
-ggplot(dat, aes(x= Marital, fill= Happiness)) + geom_bar(position = "fill") + ggtitle("Marital Status Grouped by Happiness")
+ggplot(dat, aes(x= Marital, fill= Happiness)) + geom_bar(position = "fill") + ggtitle("Marital Status Grouped by Happiness") + coord_flip() + ylab("Percentage")
 ```
 
-Married people had the highest rate of very happy or pretty happy people. This was followed by those that were never married. People that were seperated had the highest rate of being not too happy. The highest rate of a respondent having not applicable as there happiness rating was those who answered 'No answer' for Marital Status.
+Married people had the highest rate of very happy or pretty happy people. This was followed by those that were never married. People that were seperated had the highest rate of being not too happy. The highest rate of a respondent having not applicable as their happiness rating was those who answered 'No answer' for Marital Status.
 
-
-
+```{r}
+ggplot(dat, aes(x= Marital, fill= Happiness)) + geom_bar(position = "fill") + ggtitle("Marital Status Grouped by Happiness Faceted by Sex") + facet_wrap(~Sex) + coord_flip() + ylab("Percentage")
+```
+The level of happiness does not differ greatly between males and females of the same marital status. The one major difference between the charts seperated by sex is in the marital status category named "no answer". In this category women appear to be more happy than their male counterparts. However, they are also responsible for most of the "Don't Know" category in the full sample chart.
 
 
