@@ -15,9 +15,9 @@ dat <- readxl::read_xls('GSS.xls')
 dat
 
 names(dat) <- c('Year','Happiness', 'Party', 'Earners', 'Race','Sex','Age', 'Children', 'Marital', 'ID', 'Ballot')
-dat
 ```
 
+1.)
 ```{r}
 library(ggplot2)
 
@@ -27,11 +27,60 @@ dat <- dat[!is.na(dat$Happiness), ]
 ggplot(dat, aes(x= Marital, fill= Happiness)) + geom_bar(position = "fill") + ggtitle("Marital Status Grouped by Happiness") + coord_flip() + ylab("Percentage")
 ```
 
+
 Married people had the highest rate of very happy or pretty happy people. This was followed by those that were never married. People that were seperated had the highest rate of being not too happy. The highest rate of a respondent having not applicable as their happiness rating was those who answered 'No answer' for Marital Status.
 
+2.)
 ```{r}
 ggplot(dat, aes(x= Marital, fill= Happiness)) + geom_bar(position = "fill") + ggtitle("Marital Status Grouped by Happiness Faceted by Sex") + facet_wrap(~Sex) + coord_flip() + ylab("Percentage")
 ```
+
 The level of happiness does not differ greatly between males and females of the same marital status. The one major difference between the charts seperated by sex is in the marital status category named "no answer". In this category women appear to be more happy than their male counterparts. However, they are also responsible for most of the "Don't Know" category in the full sample chart.
+
+3.)
+```{r}
+ggplot(dat, aes(x=Party, fill=Happiness)) + geom_bar(position='dodge') + 
+  coord_flip() + ggtitle("Happiness Grouped by Political Party")
+```
+
+This graph shows that the happiest people tend to consider themselves as Republicans or Democrats, as shown by how many of them responded with "Very happy". These same groups also had high numbers of "Pretty happy" people, except for Strong republicans, who have the least number of "pretty happy" people of any group. There are also large differences in the number of respondents for each group, with "Not strong democrats" being the largest group, and "No answer" being the smallest. 
+
+4.) How does sex or year reflect political party representation?
+```{r}
+dat$Age <- as.integer(dat$Age)
+dat2 <- dat[!is.na(dat$Age), ]
+#ggplot(dat, aes(x=Year, fill=Party)) + geom_histogram(binwidth = 5) + facet_grid(~Sex)
+```
+
+4.) How has happiness between males and females changed over time?
+```{r}
+ggplot(dat, aes(x=Year, fill=Happiness)) + geom_histogram(binwidth=10) + 
+  facet_grid(~Sex) + ggtitle("Happiness Changes in Males and Females Over Time")
+```
+
+This chart shows that both men and women are less happy today than they were in years past. This chart groups years into 10 year increments, which allows for ease of comparing different "decades". In both genders, it is shown that they were much more happy in the 1980s and 1990s than they are today. It also shows that women on average tend to be more happy than men in the same decades.
+
+
+
+Group into decades, make barchart of decade by happiness andfacet by sex
+```{r}
+dat70 <- dat[dat$Year < 1980 & dat$Year >=1970, ]
+dat80 <- dat[dat$Year < 1990 & dat$Year >=1980, ]
+dat90 <- dat[dat$Year < 2000 & dat$Year >=1990, ]
+dat00 <- dat[dat$Year < 2010 & dat$Year >=2000, ]
+dat10 <- dat[dat$Year < 2020 & dat$Year >=2010, ]
+
+dat$Earners <- as.integer((dat$Earners))
+
+#datYears <- c(dat70, dat80, dat90, dat00, dat10)
+#ggplot(dat, aes(, x=Happiness)) + geom_bar() + facet_grid(~Sex)
+```
+
+
+Do the number of earners in a family relate to how many children that family has?
+
+
+
+
 
 
