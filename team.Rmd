@@ -60,40 +60,31 @@ dat4 <- dat[dat$Children != 'Dk na', ]
 ggplot(dat4, aes(x= Happiness, fill = Sex)) + 
   geom_bar(position = "dodge") + facet_wrap(~Children, scale = 'free_x') + 
   coord_flip() +ggtitle("Happiness Levels by Sex Faceted by Number of Children")
+
 ```
 
 Females that have zero children seemed to report at a lower rate that they were 'Not too happy' than with any other amount of children. This was not the same for males, as the lowest rate of reporting being 'Not too happy' was when the respondent had 2 children. Males seemed answer 'Very Happy' at around the same rate for all the different number of children they could have while females were 'Very happy' at a higher rate when they had 6 children. Males tended to answer 'Pretty happy' at the highest rate when they had zero children. Females tended to answer 'Pretty Happy' at the same rate throughout almost all all the different numbers of children, except for when they had 0 children. Overall I believe that this chart illustrates that the number of children a female respondent has does not affect their happiness level drastically as long as they have 1 child or more. With Males this chart seems to show that as the amount of children the respondent has increases their overall happiness ('Pretty Happy' and 'Very Happy' combined) seems to decrease. 
 
-6.) How have Males and Females changed their opinion on Political Party over the years?
+6.)Does gender or being married or not affect a respondents political party?
 
 ```{r}
-##Make a table that contains no duplicate years and columns that represent each political party with there (THEIR JAKE, T H E I R, NOT R E) counts in that year
-dat$Party <- factor(dat$Party)
-levels(dat$Party)
+dat5<- dat
+dat5 <- dat5[dat5$Marital == 'Married' | dat5$Marital == 'Never married',]
+dat5$Marital <- factor(dat5$Marital)
+ggplot(dat5, aes(x = Party)) + geom_bar() + coord_flip() + facet_wrap(Sex~Marital, scale = 'free_x')
 ```
 
-**JAKE: DELETE THIS CHUNK BELOW v IF YOU'RE NOT USING IT. I DIDN'T.**
-Group into decades, make barchart of decade by happiness andfacet by sex
-```{r}
-dat70 <- dat[dat$Year < 1980 & dat$Year >=1970, ]
-dat80 <- dat[dat$Year < 1990 & dat$Year >=1980, ]
-dat90 <- dat[dat$Year < 2000 & dat$Year >=1990, ]
-dat00 <- dat[dat$Year < 2010 & dat$Year >=2000, ]
-dat10 <- dat[dat$Year < 2020 & dat$Year >=2010, ]
+The Party that all respondents answered at the highest rate was 'Not Strong democrat'. Females that had never married had the lowest rate of all the demographics of being a strong republican. Married respondents tended to have a higher rate of being a strong republican than respondents that were never married. Males that were never married had the highest rate of being independent over all other demographics. Married males had the highest rate of not having a strong opinion on their political party. Overall the responses vary a lot between different genders and marital status's.
 
-dat2 <- dat
-dat2$Earners <- as.integer((dat$Earners))
 
-#datYears <- c(dat70, dat80, dat90, dat00, dat10)
-#ggplot(dat, aes(, x=Happiness)) + geom_bar() + facet_grid(~Sex)
-```
 
 
 7.) In the 21st century, how did the number of earners in a family relate to how many children that family had?
 ```{r}
 dat21 <- dat[dat$Year >=2000, ]
+
 ggplot(dat21, aes(Earners)) + geom_bar(aes(fill=Children), position=position_fill(reverse=TRUE)) + 
-  ggtitle("How Number of Earners Relate to Number of Children in the 21st Century") + ylab("Percentage")
+  ggtitle("How Number of Earners Relate to Number of Children in the 21st Century") + ylab("Percentage") + coord_flip()
 ```
 
 In the 21st century, this graph doesn't appear to show a clear strong trend. Instead, it appears that the number of earners changes the size if the family in many different ways, with a few interesting trends to point out. Families with 1 earner have a much higher percentage of having 0 kids than families with 0 or 2 earners. This might be because these families cannot afford to have children on only one paycheck. It is also interesting to point out that across all earner marks, a higher percentage of families choose to have 0 kids than only have 1 kid. Most families appear to have multiple children once they start having children, regardless of number of earners. This is backed up by the low percentage of 1 children, 0 earner families. An odd trend to point out is the over 25% of respondents in 6 earner families with 4 children. This trend is not carried over by any other number of earners, and I'd be very curious to see why this is. It's possible that all 4 children are earners in these families, and perhaps the added income is the reason for having these children in the first place.
